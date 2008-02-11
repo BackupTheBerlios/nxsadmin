@@ -25,7 +25,7 @@
 //----------------------------------------------------------------------------
 MyProcessWindow::MyProcessWindow()
 {
-    this->set_default_size(600, 400);
+    this->set_default_size(800, 400);
     this->set_position(Gtk::WIN_POS_CENTER);
     this->set_border_width(5);
     this->set_title("Processes list of user: ");
@@ -58,7 +58,7 @@ MyProcessWindow::~MyProcessWindow()
 //----------------------------------------------------------------------------
 void MyProcessWindow::onButtonRefreshClicked()
 {
-    
+    this->createProcessesList(theUserName);
 }
 //----------------------------------------------------------------------------
 void MyProcessWindow::onButtonCloseClicked()
@@ -68,40 +68,72 @@ void MyProcessWindow::onButtonCloseClicked()
 //----------------------------------------------------------------------------
 bool MyProcessWindow::createProcessesList(std::string & aUserName)
 {
-    gint result;
+    gint i = 0;
+    theUserName = aUserName;
+    std::string tmpstr;
+    std::string field;
     std::string stdmsg;
-    std::string stderr;
-    std::string command("ps -U " + aUserName + " -u " + aUserName + " u");
+    std::string command("ps -U " + aUserName + " -u " + aUserName + " u --no-headers");
+    std::string::iterator it, it2;
+    
+    Gtk::TreeModel::Row row;
+    
     this->set_title(aUserName + " processes list");
     
-    Gtk::TreeModel::Row row = *(theTreeModel->append());
-    row[theColumns.theSelect] = true;
-    
-    std::string test("test");
-    row.set_value(1, test);
+    theTreeModel->clear();
     
     try
     {
-        Glib::spawn_command_line_sync(command, &stdmsg, &stderr, &result);
+        Glib::spawn_command_line_sync(command, &stdmsg, NULL, NULL);
     }
     catch (Glib::Exception & e)
     {
         return false;
     }
     
-    // 11 columns
-    // maxim     6978  0.2  2.0  31212 15764 ?        S    12:15   0:00 konsole
-    std::string::iterator it = stdmsg.begin();
-    while (it != stdmsg.end())
+    for (it = stdmsg.begin(); it != stdmsg.end(); ++it)
     {
-        for (gint i = 1; i < 12; ++i)
+        row = (*theTreeModel->append());
+        
+        while ((*it) != '\n')
         {
-            std::cout << i << std::endl;
+            tmpstr += (*it);
+            ++it;
         }
-        //std::cout << (*it);
-        ++it;
+        tmpstr += " ";
+        
+        for (it2 = tmpstr.begin(); it2 != tmpstr.end(); ++it2)
+        {
+            if (i < 10)
+            {
+                while ((*it2) != ' ')
+                {
+                    field += (*it2);
+                    ++it2;
+                }
+            }
+            else
+            {
+                field.erase();
+                for(; it2 != tmpstr.end(); ++it2)
+                {
+                    field += (*it2);
+                }
+                row.set_value(11, field);
+                i = 1;
+                field.erase();
+                break;
+            }    
+            if ((!field.empty()) && (++i < 11)) 
+            {
+                row.set_value(i, field);
+                field.erase();
+            }    
+        }     
+        tmpstr.erase();
+        field.erase();
+        i = 0;
     }
-    
     return true;
 }
 //----------------------------------------------------------------------------
