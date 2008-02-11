@@ -50,6 +50,7 @@ protected:
     virtual void onMenuMessageSendToAll();
     
     virtual void onMenuViewRefreshList();
+    virtual void onMenuViewProcesses();
     
     virtual void onMenuHelpAbout();
     
