@@ -80,6 +80,8 @@ protected:
     
 protected:
     
+    std::string theUserName;
+    
     ModelColumns theColumns;
     
     Gtk::VBox * theVBox;
