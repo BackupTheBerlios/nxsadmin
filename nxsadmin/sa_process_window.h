@@ -38,6 +38,7 @@ protected:
     // Signal handlers
     virtual void onButtonRefreshClicked();
     virtual void onButtonCloseClicked();
+    virtual void onButtonKillClicked();
     
 protected:
     
@@ -89,6 +90,7 @@ protected:
     Gtk::HButtonBox * theHButtonBox;
     Gtk::Button * theButtonRefresh;
     Gtk::Button * theButtonClose;
+    Gtk::Button * theButtonKill;
     
     Gtk::TreeView * theTreeView;
     Glib::RefPtr<Gtk::ListStore> theTreeModel;

@@ -28,7 +28,7 @@ MyProcessWindow::MyProcessWindow()
     this->set_default_size(800, 400);
     this->set_position(Gtk::WIN_POS_CENTER);
     this->set_border_width(5);
-    this->set_title("Processes list of user: ");
+    this->set_title(" processes list");
     
     theVBox = Gtk::manage(new Gtk::VBox);
     theVBox->set_spacing(10);
@@ -42,8 +42,12 @@ MyProcessWindow::MyProcessWindow()
     theButtonClose = Gtk::manage(new Gtk::Button(Gtk::Stock::CLOSE));
     theButtonClose->signal_clicked().connect(sigc::mem_fun(*this,
             &MyProcessWindow::onButtonCloseClicked));
+    theButtonKill = Gtk::manage(new Gtk::Button("Kill"));
+    theButtonKill->signal_clicked().connect(sigc::mem_fun(*this,
+            &MyProcessWindow::onButtonKillClicked));
     
     theHButtonBox = Gtk::manage(new Gtk::HButtonBox(Gtk::BUTTONBOX_END, 10));
+    theHButtonBox ->pack_start(*theButtonKill, Gtk::PACK_SHRINK, 5);
     theHButtonBox->pack_start(*theButtonRefresh, Gtk::PACK_SHRINK, 5);
     theHButtonBox->pack_start(*theButtonClose, Gtk::PACK_SHRINK, 5);
     theVBox->pack_start(*theHButtonBox, Gtk::PACK_SHRINK, 5);
@@ -217,4 +221,30 @@ void MyProcessWindow::createTreeView()
     theScrolledWindow->set_policy(Gtk::POLICY_AUTOMATIC, Gtk::POLICY_AUTOMATIC);
     theScrolledWindow->set_shadow_type(Gtk::SHADOW_OUT);
     theVBox->pack_start(*theScrolledWindow, Gtk::PACK_EXPAND_WIDGET);
+}
+//----------------------------------------------------------------------------
+void MyProcessWindow::onButtonKillClicked()
+{
+    Glib::ustring tmppid; 
+    Gtk::TreeModel::Children children = theTreeModel->children();
+    
+    for (Gtk::TreeModel::Children::iterator iter = children.begin(); iter
+                != children.end(); ++iter)
+    {
+        Gtk::TreeModel::Row row = *iter;
+
+        if (row[theColumns.theSelect])
+        {
+            tmppid = row[theColumns.thePID];
+            try
+            {
+                Glib::spawn_command_line_sync("kill " + tmppid, NULL, NULL, NULL);
+            }
+            catch (Glib::Exception & e)
+            {
+                std::cout << "Fatal error in MyProcessWindow::onButtonKillClicked()" << std::endl;
+            }
+        }
+    }
+    this->createProcessesList(theUserName);
 }
