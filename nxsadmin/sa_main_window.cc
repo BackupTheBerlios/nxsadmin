@@ -55,14 +55,24 @@ MyMainWindow::MyMainWindow()
     theBox->pack_end(*theStatusBar, Gtk::PACK_SHRINK);
     
     // Refreshing TreeModelView - called once every 50ms
-    // FIXME: Get out a timer based sessions list refreshing
-    Glib::signal_timeout().connect(sigc::mem_fun(*this, &MyMainWindow::onTimer), 5000);
+    // FIXME: Replace a timer based sessions list refreshing
+    Glib::signal_timeout().connect(sigc::mem_fun(*this,
+            &MyMainWindow::onTimer), 5000);
+    
+    theProcessWindow = new MyProcessWindow();
+    
+    // Create and fill popup menu
+    theMenuPopUp = new Gtk::Menu();
+    Gtk::Menu::MenuList & menulist = theMenuPopUp->items();
+    menulist.push_back(Gtk::Menu_Helpers::MenuElem("_View processes list",
+            sigc::mem_fun(*this, &MyMainWindow::on_menu_file_popup_generic)));
+    theMenuPopUp->accelerate(*this);
+    theTreeView->signal_button_press_event().connect(sigc::mem_fun(*this,
+            &MyMainWindow::on_button_press_event), false);
     
     this->show_all_children();
     
     this->ExecLog("nxserver --status");
-    
-    theProcessWindow = new MyProcessWindow();
 }
 //----------------------------------------------------------------------------
 MyMainWindow::~MyMainWindow()
@@ -72,6 +82,7 @@ MyMainWindow::~MyMainWindow()
     delete theMessageDialog;
     delete theToolTips;
     delete theProcessWindow;
+    delete theMenuPopUp;
 }
 //----------------------------------------------------------------------------
 void MyMainWindow::onMenuFileQuit()
@@ -230,9 +241,6 @@ void MyMainWindow::onMenuMessageSendToAll()
 void MyMainWindow::onMenuViewRefreshList()
 {
     this->fillTreeModelView(theNXDbPath);
-    std::string user("maxim");
-    theProcessWindow->createProcessesList(user);
-    theProcessWindow->show();
 }
 //----------------------------------------------------------------------------
 void MyMainWindow::onMenuHelpAbout()
@@ -800,4 +808,34 @@ void MyMainWindow::ExecLog(const std::string & aCommand, bool aMessageSend)
         theTextView->scroll_to(it);
     }
     delete [] time;
+}
+//----------------------------------------------------------------------------
+bool MyMainWindow::on_button_press_event(GdkEventButton * theEvent)
+{
+    if ((theEvent->type == GDK_BUTTON_PRESS) && (theEvent->button == 3) )
+    {
+        if (theMenuPopUp)
+        {
+            theMenuPopUp->popup(theEvent->button, theEvent->time);
+            return true; 
+        }
+    }
+    return false;
+}
+//----------------------------------------------------------------------------
+void MyMainWindow::on_menu_file_popup_generic()
+{
+    Glib::RefPtr<Gtk::TreeView::Selection> selection =
+            theTreeView->get_selection();    
+    if (selection)
+    {
+        Gtk::TreeModel::iterator it = selection->get_selected();
+        if (it)
+        {
+            Glib::ustring str = (*it)[theColumns.theUserName];
+            std::string str2 = str;
+            theProcessWindow->createProcessesList(str2);
+            theProcessWindow->show();
+        }
+    }
 }

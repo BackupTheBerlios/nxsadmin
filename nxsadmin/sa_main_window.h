@@ -57,6 +57,10 @@ protected:
     
     virtual void onButtonClearLogClicked();
     
+    virtual bool on_button_press_event(GdkEventButton * theEvent);
+    // Signal handler for popup menu items:
+    virtual void on_menu_file_popup_generic();
+    
 protected:
     
     class ModelColumns : public Gtk::TreeModel::ColumnRecord
@@ -171,6 +175,8 @@ protected:
     Glib::RefPtr<Gtk::TextTag> theNormalRedFont;
     
     MyProcessWindow * theProcessWindow;
+    
+    Gtk::Menu * theMenuPopUp;
 };
 
 #endif	/* _SA_MAIN_WINDOW_H */
