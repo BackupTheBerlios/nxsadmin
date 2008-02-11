@@ -290,6 +290,9 @@ void MyMainWindow::createMenuAndToolbar()
     theActionGroup->add(Gtk::Action::create("ViewRefresh", Gtk::Stock::REFRESH,
             "Refresh sessions list"), sigc::mem_fun(*this,
             &MyMainWindow::onMenuViewRefreshList));
+    theActionGroup->add(Gtk::Action::create("ViewProcesses", Gtk::Stock::ZOOM_IN,
+            "View processes list"), sigc::mem_fun(*this,
+            &MyMainWindow::onMenuViewProcesses));
     
     // Help menu
     theActionGroup->add(Gtk::Action::create("HelpMenu", "Help"));
@@ -319,6 +322,7 @@ void MyMainWindow::createMenuAndToolbar()
             "    </menu>"
             "    <menu action='ViewMenu'>"
             "      <menuitem action='ViewRefresh'/>"
+            "      <menuitem action='ViewProcesses'/>"
             "    </menu>"
             "    <menu action='HelpMenu'>"
             "      <menuitem action='HelpAbout'/>"
@@ -838,4 +842,9 @@ void MyMainWindow::on_menu_file_popup_generic()
             theProcessWindow->show();
         }
     }
+}
+//----------------------------------------------------------------------------
+void MyMainWindow::onMenuViewProcesses()
+{
+    this->on_menu_file_popup_generic();
 }
