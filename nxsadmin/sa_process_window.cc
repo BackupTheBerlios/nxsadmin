@@ -21,6 +21,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <glibmm/i18n.h>
 #include "sa_process_window.h"
 //----------------------------------------------------------------------------
 MyProcessWindow::MyProcessWindow()
@@ -28,7 +29,7 @@ MyProcessWindow::MyProcessWindow()
     this->set_default_size(800, 400);
     this->set_position(Gtk::WIN_POS_CENTER);
     this->set_border_width(5);
-    this->set_title(" processes list");
+    this->set_title(_(" processes list"));
     
     theVBox = Gtk::manage(new Gtk::VBox);
     theVBox->set_spacing(10);
@@ -42,7 +43,7 @@ MyProcessWindow::MyProcessWindow()
     theButtonClose = Gtk::manage(new Gtk::Button(Gtk::Stock::CLOSE));
     theButtonClose->signal_clicked().connect(sigc::mem_fun(*this,
             &MyProcessWindow::onButtonCloseClicked));
-    theButtonKill = Gtk::manage(new Gtk::Button("Kill"));
+    theButtonKill = Gtk::manage(new Gtk::Button(_("Kill")));
     theButtonKill->signal_clicked().connect(sigc::mem_fun(*this,
             &MyProcessWindow::onButtonKillClicked));
     
@@ -82,7 +83,7 @@ bool MyProcessWindow::createProcessesList(std::string & aUserName)
     
     Gtk::TreeModel::Row row;
     
-    this->set_title(aUserName + " processes list");
+    this->set_title(aUserName + _(" processes list"));
     
     theTreeModel->clear();
     
@@ -148,7 +149,7 @@ void MyProcessWindow::createTreeView()
     theTreeModelSort = Gtk::TreeModelSort::create(theTreeModel);
     
     theTreeView->set_model(theTreeModelSort);
-    theTreeView->append_column_editable("Select", theColumns.theSelect);
+    theTreeView->append_column_editable(_("Select"), theColumns.theSelect);
     theTreeView->append_column("USER", theColumns.theUSER);
     theTreeView->append_column("PID", theColumns.thePID);
     theTreeView->append_column("CPU", theColumns.theCPU);
@@ -242,7 +243,7 @@ void MyProcessWindow::onButtonKillClicked()
             }
             catch (Glib::Exception & e)
             {
-                std::cout << "Fatal error in MyProcessWindow::onButtonKillClicked()" << std::endl;
+                std::cout << _("Fatal error in MyProcessWindow::onButtonKillClicked()") << std::endl;
             }
         }
     }

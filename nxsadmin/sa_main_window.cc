@@ -24,6 +24,7 @@
 #include <dirent.h>
 #include <sys/types.h>
 #include <sys/stat.h>
+#include <glibmm/i18n.h>
 #include "sa_sys_utils.h"
 #include "sa_main_window.h"
 //----------------------------------------------------------------------------
@@ -37,7 +38,7 @@ MyMainWindow::MyMainWindow()
     this->set_default_size(700, 350);
     this->set_border_width(5);
     this->set_position(Gtk::WIN_POS_CENTER);
-    this->set_title("FreeNX Sessions Administrator");
+    this->set_title(_("FreeNX Sessions Administrator"));
     
     theStatusBar = Gtk::manage(new Gtk::Statusbar);
     theBox = Gtk::manage(new Gtk::VBox);
@@ -64,7 +65,7 @@ MyMainWindow::MyMainWindow()
     // Create and fill popup menu
     theMenuPopUp = new Gtk::Menu();
     Gtk::Menu::MenuList & menulist = theMenuPopUp->items();
-    menulist.push_back(Gtk::Menu_Helpers::MenuElem("_View processes list",
+    menulist.push_back(Gtk::Menu_Helpers::MenuElem(_("_View processes list"),
             sigc::mem_fun(*this, &MyMainWindow::on_menu_file_popup_generic)));
     theMenuPopUp->accelerate(*this);
     theTreeView->signal_button_press_event().connect(sigc::mem_fun(*this,
@@ -179,7 +180,7 @@ void MyMainWindow::onMenuMessageSend()
         {
             Gtk::MessageDialog
                     dialog(*this, "ERROR", false, Gtk::MESSAGE_ERROR);
-            dialog.set_secondary_text("The message length more than 1024 symbols!!");
+            dialog.set_secondary_text(_("The message length more than 1024 symbols!!"));
             dialog.run();
             return;
         }
@@ -230,7 +231,7 @@ void MyMainWindow::onMenuMessageSendToAll()
         {
             Gtk::MessageDialog
                     dialog(*this, "ERROR", false, Gtk::MESSAGE_ERROR);
-            dialog.set_secondary_text("The message length more than 1024 symbols!!");
+            dialog.set_secondary_text(_("The message length more than 1024 symbols!!"));
             dialog.run();
             return;
         }
@@ -259,45 +260,45 @@ void MyMainWindow::createMenuAndToolbar()
     theActionGroup = Gtk::ActionGroup::create();
     
     // File menu
-    theActionGroup->add(Gtk::Action::create("FileMenu", "File"));
+    theActionGroup->add(Gtk::Action::create("FileMenu", _("File")));
     theActionGroup->add(Gtk::Action::create("FileQuit", Gtk::Stock::QUIT),
             sigc::mem_fun(*this, &MyMainWindow::onMenuFileQuit));
     
     // Session menu
-    theActionGroup->add(Gtk::Action::create("SessionMenu", "Session"));
+    theActionGroup->add(Gtk::Action::create("SessionMenu", _("Session")));
     theActionGroup->add(Gtk::Action::create("SessionSuspend",
-            Gtk::Stock::MEDIA_PAUSE, "Suspend session"), sigc::mem_fun(*this,
+            Gtk::Stock::MEDIA_PAUSE, _("Suspend session")), sigc::mem_fun(*this,
             &MyMainWindow::onMenuSessionSuspend));
     theActionGroup->add(Gtk::Action::create("SessionTerminate",
-            Gtk::Stock::CLOSE, "Terminate session"), sigc::mem_fun(*this,
+            Gtk::Stock::CLOSE, _("Terminate session")), sigc::mem_fun(*this,
             &MyMainWindow::onMenuSessionTerminate));
     theActionGroup->add(Gtk::Action::create("SessionSuspendAll",
-            Gtk::Stock::CANCEL, "Suspend all sessions"), sigc::mem_fun(*this,
+            Gtk::Stock::CANCEL, _("Suspend all sessions")), sigc::mem_fun(*this,
             &MyMainWindow::onMenuSessionSuspendAll));
     theActionGroup->add(Gtk::Action::create("SessionTerminateAll",
-            Gtk::Stock::STOP, "Terminate all sessions"), sigc::mem_fun(*this,
+            Gtk::Stock::STOP, _("Terminate all sessions")), sigc::mem_fun(*this,
             &MyMainWindow::onMenuSessionTerminateAll));
     
     // Message menu
-    theActionGroup->add(Gtk::Action::create("MessageMenu", "Message"));
-    theActionGroup->add(Gtk::Action::create("MessageSend", "Send"),
+    theActionGroup->add(Gtk::Action::create("MessageMenu", _("Message")));
+    theActionGroup->add(Gtk::Action::create("MessageSend", _("Send")),
             sigc::mem_fun(*this, &MyMainWindow::onMenuMessageSend));
-    theActionGroup->add(Gtk::Action::create("MessageSendToAll", "Send to all"),
+    theActionGroup->add(Gtk::Action::create("MessageSendToAll", _("Send to all")),
             sigc::mem_fun(*this, &MyMainWindow::onMenuMessageSendToAll));
     
     // View menu
-    theActionGroup->add(Gtk::Action::create("ViewMenu", "View"));
+    theActionGroup->add(Gtk::Action::create("ViewMenu", _("View")));
     theActionGroup->add(Gtk::Action::create("ViewRefresh", Gtk::Stock::REFRESH,
-            "Refresh sessions list"), sigc::mem_fun(*this,
+            _("Refresh sessions list")), sigc::mem_fun(*this,
             &MyMainWindow::onMenuViewRefreshList));
     theActionGroup->add(Gtk::Action::create("ViewProcesses", Gtk::Stock::ZOOM_IN,
-            "View processes list"), sigc::mem_fun(*this,
+            _("View processes list")), sigc::mem_fun(*this,
             &MyMainWindow::onMenuViewProcesses));
     
     // Help menu
-    theActionGroup->add(Gtk::Action::create("HelpMenu", "Help"));
+    theActionGroup->add(Gtk::Action::create("HelpMenu", _("Help")));
     theActionGroup->add(Gtk::Action::create("HelpAbout", Gtk::Stock::ABOUT,
-            "About NX session administrator"), sigc::mem_fun(*this,
+            _("About NX session administrator")), sigc::mem_fun(*this,
             &MyMainWindow::onMenuHelpAbout));
     
     theUIManager = Gtk::UIManager::create();
@@ -362,27 +363,27 @@ void MyMainWindow::createMenuAndToolbar()
     theToolTips = new Gtk::Tooltips();
     Gtk::Widget * toolItem = theUIManager->get_widget("/ToolBar/FileQuit");
     if (toolItem)
-        theToolTips->set_tip(*toolItem, "Quit from program");
+        theToolTips->set_tip(*toolItem, _("Quit from program"));
     
     toolItem = theUIManager->get_widget("/ToolBar/SessionSuspend");
     if (toolItem)
-        theToolTips->set_tip(*toolItem, "Suspend the session(s)");
+        theToolTips->set_tip(*toolItem, _("Suspend the session(s)"));
     
     toolItem = theUIManager->get_widget("/ToolBar/SessionTerminate");
     if (toolItem)
-        theToolTips->set_tip(*toolItem, "Terminate session(s)");
+        theToolTips->set_tip(*toolItem, _("Terminate session(s)"));
     
     toolItem = theUIManager->get_widget("/ToolBar/SessionSuspendAll");
     if (toolItem)
-        theToolTips->set_tip(*toolItem, "Suspend all sessions");
+        theToolTips->set_tip(*toolItem, _("Suspend all sessions"));
     
     toolItem = theUIManager->get_widget("/ToolBar/SessionTerminateAll");
     if (toolItem)
-        theToolTips->set_tip(*toolItem, "Terminate all sessions");
+        theToolTips->set_tip(*toolItem, _("Terminate all sessions"));
     
     toolItem = theUIManager->get_widget("/ToolBar/ViewRefresh");
     if (toolItem)
-        theToolTips->set_tip(*toolItem, "Refresh sessions list");
+        theToolTips->set_tip(*toolItem, _("Refresh sessions list"));
     
     theToolTips->enable();
 }
@@ -409,14 +410,14 @@ void MyMainWindow::createTreeView()
     this->fillTreeModelView(theNXDbPath);
     
     // Add the TreeView's view columns:
-    theTreeView->append_column_editable("Select", theColumns.theSelect);
-    theTreeView->append_column("User", theColumns.theUserName);
-    theTreeView->append_column("Session", theColumns.theSessionName);
-    theTreeView->append_column("Display", theColumns.theDisplay);
-    theTreeView->append_column("Address", theColumns.theClientAddress);
-    theTreeView->append_column("Type", theColumns.theType);
-    theTreeView->append_column("Status", theColumns.theStatus);
-    theTreeView->append_column("Session Id", theColumns.theSessionId);
+    theTreeView->append_column_editable(_("Select"), theColumns.theSelect);
+    theTreeView->append_column(_("User"), theColumns.theUserName);
+    theTreeView->append_column(_("Session"), theColumns.theSessionName);
+    theTreeView->append_column(_("Display"), theColumns.theDisplay);
+    theTreeView->append_column(_("Address"), theColumns.theClientAddress);
+    theTreeView->append_column(_("Type"), theColumns.theType);
+    theTreeView->append_column(_("Status"), theColumns.theStatus);
+    theTreeView->append_column(_("Session Id"), theColumns.theSessionId);
     
     Gtk::TreeView::Column * column = theTreeView->get_column(0);
     if (column)
@@ -461,15 +462,15 @@ void MyMainWindow::createTreeView()
 void MyMainWindow::createAboutDialog()
 {
     theAboutDialog = new Gtk::AboutDialog();
-    theAboutDialog->set_name("FreeNX Sessions Administrator");
+    theAboutDialog->set_name(_("FreeNX Sessions Administrator"));
     theAboutDialog->set_version("0.2");
-    theAboutDialog->set_copyright("(C) 2008 by Maxim Stjazhkin");
-    theAboutDialog->set_comments("FreeNX Sessions Administrator provides a graphical tool for managment of active NX sessions on FreeNX server");
+    theAboutDialog->set_copyright(_("(C) 2008 by Maxim Stjazhkin"));
+    theAboutDialog->set_comments(_("FreeNX Sessions Administrator provides a graphical tool for managment of active NX sessions on FreeNX server"));
     theAboutDialog->set_license("GPL");
     theAboutDialog->set_website("http://cgroup.drohobych.com.ua");
     theAboutDialog->set_website_label("cgroup.drohobych.com.ua");
     std::list<Glib::ustring> list_autors;
-    list_autors.push_back("Maxim Stjazhkin, maxt_t@drohobych.com.ua");
+    list_autors.push_back(_("Maxim Stjazhkin, maxt_t@drohobych.com.ua"));
     theAboutDialog->set_authors(list_autors);
 }
 //----------------------------------------------------------------------------
@@ -483,12 +484,12 @@ void MyMainWindow::createSendMessageDialog()
     
     theMessageDialog = new Gtk::Dialog();
     theMessageDialog->set_default_size(400, 100);
-    theMessageDialog->set_title("Send message");
+    theMessageDialog->set_title(_("Send message"));
     theMessageDialog->set_position(Gtk::WIN_POS_CENTER);
     Gtk::VBox * vbox = theMessageDialog->get_vbox();
     vbox->pack_start(*theMessageEntry, Gtk::PACK_SHRINK);
     theMessageDialog->add_button(Gtk::Stock::CANCEL, Gtk::RESPONSE_CANCEL);
-    theMessageDialog->add_button("Send", Gtk::RESPONSE_OK);
+    theMessageDialog->add_button(_("Send"), Gtk::RESPONSE_OK);
     theMessageDialog->set_default_response(Gtk::RESPONSE_OK);
 }
 //----------------------------------------------------------------------------
@@ -509,7 +510,7 @@ void MyMainWindow::createLogPaned()
     theScrolledWindow2->set_policy(Gtk::POLICY_AUTOMATIC, Gtk::POLICY_AUTOMATIC);
     theScrolledWindow2->set_shadow_type(Gtk::SHADOW_OUT);
     
-    theButtonClearLog = Gtk::manage(new Gtk::Button("Clear log"));
+    theButtonClearLog = Gtk::manage(new Gtk::Button(_("Clear log")));
     theButtonClearLog->signal_clicked().connect(sigc::mem_fun(*this,
             &MyMainWindow::onButtonClearLogClicked));
     theHButtonBox = Gtk::manage(new Gtk::HButtonBox(Gtk::BUTTONBOX_END, 5));
@@ -733,7 +734,7 @@ void MyMainWindow::fillTreeModelView(const Glib::ustring & aPath)
     }
     
     theStatusBar->pop(0);
-    g_snprintf(buff, 200, "Sessions: all - %d  running - %d  suspended - %d",
+    g_snprintf(buff, 200, _("Sessions: all - %d  running - %d  suspended - %d"),
             children.size(), theRunningNum, theSuspendedNum);
     theStatusBar->push(buff, 0);
 }

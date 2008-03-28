@@ -18,12 +18,19 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
+#include "config.h"
 #include "sa_main_window.h"
 #include <gtkmm/main.h>
+#include <libintl.h>
 
 int main(int argc, char * argv[])
 {
     Gtk::Main kit(argc, argv);
+    
+    bindtextdomain(GETTEXT_PACKAGE, PROGRAMNAME_LOCALEDIR);
+    bind_textdomain_codeset(GETTEXT_PACKAGE, "UTF-8");
+    textdomain(GETTEXT_PACKAGE);
+    
     MyMainWindow window;
     kit.run(window);
     return 0;
