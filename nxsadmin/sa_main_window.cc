@@ -463,7 +463,7 @@ void MyMainWindow::createAboutDialog()
 {
     theAboutDialog = new Gtk::AboutDialog();
     theAboutDialog->set_name(_("FreeNX Sessions Administrator"));
-    theAboutDialog->set_version("0.2");
+    theAboutDialog->set_version("0.2.1");
     theAboutDialog->set_copyright(_("(C) 2008 by Maxim Stjazhkin"));
     theAboutDialog->set_comments(_("FreeNX Sessions Administrator provides a graphical tool for managment of active NX sessions on FreeNX server"));
     theAboutDialog->set_license("GPL");
