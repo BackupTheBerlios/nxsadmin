@@ -771,14 +771,15 @@ void MyMainWindow::ExecLog(const std::string & aCommand, bool aMessageSend)
     gint result;
     std::string stdmsg;
     std::string stderr;
+    Glib::RefPtr<Gtk::TextBuffer::Mark> mark;
     char * time = new char[40];
-    
+
     System::getTimeStr(time);
     std::string timestr(time);
-    
+
     Gtk::TextIter it = theTextBuffer->end();
     theTextBuffer->insert_with_tag(it, timestr + '\n', theBoldFont);
-    
+
     if (aMessageSend)
     {
         try
@@ -805,19 +806,22 @@ void MyMainWindow::ExecLog(const std::string & aCommand, bool aMessageSend)
         }
         it = theTextBuffer->end();
         theTextBuffer->insert_with_tag(it, stdmsg, theNormalFont);
-        
+
         it = theTextBuffer->end();
         theTextBuffer->insert_with_tag(it, stderr, theNormalRedFont);
-        
-        it = theTextBuffer->end();
-        theTextView->scroll_to(it);
     }
+    
+    // This three lines added for correct text scrolling
+    it = theTextBuffer->end();
+    mark = theTextBuffer->create_mark("endmark", it);
+    theTextView->scroll_to(mark);
+        
     delete [] time;
 }
 //----------------------------------------------------------------------------
 bool MyMainWindow::on_button_press_event(GdkEventButton * theEvent)
 {
-    if ((theEvent->type == GDK_BUTTON_PRESS) && (theEvent->button == 3) )
+    if ((theEvent->type == GDK_BUTTON_PRESS) && (theEvent->button == 3))
     {
         if (theMenuPopUp)
         {
