@@ -137,12 +137,16 @@ protected:
     
 protected:
     
+    Gtk::Label Label1; // XXX Remove this!
+            
     ModelColumns theColumns;
     
     Gtk::AboutDialog * theAboutDialog;
     Gtk::VBox * theBox;
     Gtk::ScrolledWindow * theScrolledWindow;
     Gtk::Statusbar * theStatusBar;
+    
+    Gtk::Notebook * theNoteBook;
     
     Gtk::TreeView * theTreeView;
     Glib::RefPtr<Gtk::ListStore> theTreeModel;

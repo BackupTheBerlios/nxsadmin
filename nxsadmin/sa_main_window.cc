@@ -32,10 +32,10 @@
 //----------------------------------------------------------------------------
 Glib::ustring MyMainWindow::theNXDbPath("/var/lib/nxserver/db/running/");
 //----------------------------------------------------------------------------
-MyMainWindow::MyMainWindow()
+MyMainWindow::MyMainWindow() : Label1("Contents of table 2")
 {
     theRunningNum = theSuspendedNum = 0;
-    this->set_default_size(700, 350);
+    this->set_default_size(700, 550);
     this->set_border_width(5);
     this->set_position(Gtk::WIN_POS_CENTER);
     this->set_title(_("FreeNX Sessions Administrator"));
@@ -51,7 +51,11 @@ MyMainWindow::MyMainWindow()
     this->createLogPaned();
     this->createTreeView();
     
-    theBox->pack_start(*theVPaned, Gtk::PACK_EXPAND_WIDGET);
+    theNoteBook = Gtk::manage(new Gtk::Notebook);
+    theNoteBook->append_page(*theVPaned, _("Sessions"));
+    theNoteBook->append_page(Label1, "Second");
+
+    theBox->pack_start(*theNoteBook);
     theBox->pack_start(*theHButtonBox, Gtk::PACK_SHRINK, 5);
     theBox->pack_end(*theStatusBar, Gtk::PACK_SHRINK);
     
@@ -397,7 +401,8 @@ void MyMainWindow::createTreeView()
     theScrolledWindow->add(*theTreeView);
     theScrolledWindow->set_policy(Gtk::POLICY_AUTOMATIC, Gtk::POLICY_AUTOMATIC);
     theScrolledWindow->set_shadow_type(Gtk::SHADOW_OUT);
-    // XXX: theBox->pack_start(*theScrolledWindow);
+    
+    // Add the ScrolledWindow into VPaned
     theVPaned->pack1(*theScrolledWindow, Gtk::FILL);
     
     // Create the Tree model:
@@ -526,8 +531,9 @@ void MyMainWindow::createLogPaned()
     theNormalRedFont->property_weight() = Pango::WEIGHT_NORMAL;
     theNormalRedFont->property_foreground() = "#FF0000";
     
+    // Add ScrolledWindow with execution log into VPaned
     theVPaned->pack2(*theScrolledWindow2, Gtk::EXPAND);
-    
+   
     theRunningNum = theSuspendedNum = 0;
 }
 //----------------------------------------------------------------------------
