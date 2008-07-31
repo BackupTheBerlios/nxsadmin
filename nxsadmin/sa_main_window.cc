@@ -24,6 +24,7 @@
 #include <dirent.h>
 #include <sys/types.h>
 #include <sys/stat.h>
+#include <cstring>
 #include <glibmm/i18n.h>
 #include "sa_sys_utils.h"
 #include "sa_main_window.h"

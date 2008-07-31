@@ -52,19 +52,19 @@ dist/Debug/GNU-Linux-x86/nxsadmin: ${OBJECTFILES}
 
 ${OBJECTDIR}/sa_main_window.o: sa_main_window.cc 
 	${MKDIR} -p ${OBJECTDIR}
-	$(COMPILE.cc) -g -Wall -o ${OBJECTDIR}/sa_main_window.o sa_main_window.cc
+	$(COMPILE.cc) -g -Wall -DPROGRAMNAME_LOCALEDIR=\"/usr/local/share/locale\" -o ${OBJECTDIR}/sa_main_window.o sa_main_window.cc
 
 ${OBJECTDIR}/main.o: main.cc 
 	${MKDIR} -p ${OBJECTDIR}
-	$(COMPILE.cc) -g -Wall -o ${OBJECTDIR}/main.o main.cc
+	$(COMPILE.cc) -g -Wall -DPROGRAMNAME_LOCALEDIR=\"/usr/local/share/locale\" -o ${OBJECTDIR}/main.o main.cc
 
 ${OBJECTDIR}/sa_process_window.o: sa_process_window.cc 
 	${MKDIR} -p ${OBJECTDIR}
-	$(COMPILE.cc) -g -Wall -o ${OBJECTDIR}/sa_process_window.o sa_process_window.cc
+	$(COMPILE.cc) -g -Wall -DPROGRAMNAME_LOCALEDIR=\"/usr/local/share/locale\" -o ${OBJECTDIR}/sa_process_window.o sa_process_window.cc
 
 ${OBJECTDIR}/sa_sys_utils.o: sa_sys_utils.cc 
 	${MKDIR} -p ${OBJECTDIR}
-	$(COMPILE.cc) -g -Wall -o ${OBJECTDIR}/sa_sys_utils.o sa_sys_utils.cc
+	$(COMPILE.cc) -g -Wall -DPROGRAMNAME_LOCALEDIR=\"/usr/local/share/locale\" -o ${OBJECTDIR}/sa_sys_utils.o sa_sys_utils.cc
 
 # Subprojects
 .build-subprojects:
