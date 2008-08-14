@@ -18,38 +18,24 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
-#include <cstddef>
-#include <cstdlib>
-#include <cstdio>
-#include <fstream>
-#include <iostream>
-#include <sstream>
-#include <stdexcept>
-#include <string>
-#include "tos-xconf.h"
-#include "tos-sessions.h"
 #include "tos-staff.h"
 
-using namespace std;
-
-int main(int argc, char** argv)
+std::string & replaceAll(std::string & context, const std::string & from,
+                         const std::string & to)
 {
-//    requireMinArgs(argc, 1);
-//
-//    ifstream in(argv[1]);
-//    assure(in, argv[1]);
-    ifstream in("/home/maxim/NetBeansProjects/tos-miniconf/dist/Debug/GNU-Linux-x86/termos.conf-everest");
-    assure(in, "/home/maxim/NetBeansProjects/tos-miniconf/dist/Debug/GNU-Linux-x86/termos.conf-everest");
-
-    XorgConf xconfig;
-    if (xconfig.parseTOSConfig(in))
+    using namespace std;
+    size_t lookHere = 0;
+    size_t foundHere;
+    while ((foundHere = context.find(from, lookHere))
+            != string::npos)
     {
-        cout << "tos-miniconf: Xorg section parsed normal" << endl;
+        context.replace(foundHere, from.size(), to);
+        lookHere = foundHere + to.size();
     }
-    xconfig.buildXorgConfig();
-
-    in.close();
-
-    return (EXIT_SUCCESS);
+    return context;
 }
 
+bool startsWith(const std::string & base, const std::string & key)
+{
+    return base.compare(0, key.size(), key) == 0;
+}

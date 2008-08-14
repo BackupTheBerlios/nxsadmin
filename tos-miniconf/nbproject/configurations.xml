@@ -4,6 +4,8 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
+      <itemPath>tos-sessions.h</itemPath>
+      <itemPath>tos-staff.h</itemPath>
       <itemPath>tos-xconf.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ResourceFiles"
@@ -14,6 +16,9 @@
                    displayName="Source Files"
                    projectFiles="true">
       <itemPath>main.cc</itemPath>
+      <itemPath>tos-sessions.cc</itemPath>
+      <itemPath>tos-staff.cc</itemPath>
+      <itemPath>tos-xconf.cc</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -38,6 +43,21 @@
       <item path="main.cc">
         <itemTool>1</itemTool>
       </item>
+      <item path="tos-sessions.cc">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="tos-sessions.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="tos-staff.cc">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="tos-staff.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="tos-xconf.cc">
+        <itemTool>1</itemTool>
+      </item>
       <item path="tos-xconf.h">
         <itemTool>3</itemTool>
       </item>
@@ -55,6 +75,7 @@
         <ccCompilerTool>
           <developmentMode>5</developmentMode>
           <stripSymbols>true</stripSymbols>
+          <commandLine>-Os</commandLine>
         </ccCompilerTool>
         <fortranCompilerTool>
           <developmentMode>5</developmentMode>
@@ -67,6 +88,21 @@
         </linkerTool>
       </compileType>
       <item path="main.cc">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="tos-sessions.cc">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="tos-sessions.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="tos-staff.cc">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="tos-staff.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="tos-xconf.cc">
         <itemTool>1</itemTool>
       </item>
       <item path="tos-xconf.h">

@@ -18,38 +18,63 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
+#ifndef _TOS_STAFF_H
+#define	_TOS_STAFF_H
+
 #include <cstddef>
 #include <cstdlib>
 #include <cstdio>
 #include <fstream>
-#include <iostream>
-#include <sstream>
-#include <stdexcept>
-#include <string>
-#include "tos-xconf.h"
-#include "tos-sessions.h"
-#include "tos-staff.h"
 
-using namespace std;
-
-int main(int argc, char** argv)
+inline void assure(std::ifstream & in, const char * filename = "")
 {
-//    requireMinArgs(argc, 1);
-//
-//    ifstream in(argv[1]);
-//    assure(in, argv[1]);
-    ifstream in("/home/maxim/NetBeansProjects/tos-miniconf/dist/Debug/GNU-Linux-x86/termos.conf-everest");
-    assure(in, "/home/maxim/NetBeansProjects/tos-miniconf/dist/Debug/GNU-Linux-x86/termos.conf-everest");
-
-    XorgConf xconfig;
-    if (xconfig.parseTOSConfig(in))
+    using namespace std;
+    if (!in)
     {
-        cout << "tos-miniconf: Xorg section parsed normal" << endl;
+        fprintf(stderr, "Could not open file %s\n", filename);
+        exit(EXIT_FAILURE);
     }
-    xconfig.buildXorgConfig();
-
-    in.close();
-
-    return (EXIT_SUCCESS);
 }
+
+inline void assure(std::ofstream & in, const char * filename = "")
+{
+    using namespace std;
+    if (!in)
+    {
+        fprintf(stderr, "Could not open file %s\n", filename);
+        exit(EXIT_FAILURE);
+    }
+}
+
+inline void requireArgs(int argc, int args,
+                        const char * msg = "Must use %d arguments")
+{
+    using namespace std;
+    if (argc != args + 1)
+    {
+        fprintf(stderr, msg, args);
+        fputs("\n", stderr);
+        exit(EXIT_FAILURE);
+    }
+}
+
+inline void requireMinArgs(int argc, int minArgs,
+                           const char * msg =
+                           "Must use at least %d arguments")
+{
+    using namespace std;
+    if (argc < minArgs + 1)
+    {
+        fprintf(stderr, msg, minArgs);
+        fputs("\n", stderr);
+        exit(EXIT_FAILURE);
+    }
+}
+
+std::string & replaceAll(std::string & context, const std::string & from,
+                         const std::string & to);
+
+bool startsWith(const std::string & base, const std::string & key);
+
+#endif	/* _TOS_STAFF_H */
 

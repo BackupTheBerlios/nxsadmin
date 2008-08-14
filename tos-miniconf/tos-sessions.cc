@@ -18,38 +18,21 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
-#include <cstddef>
-#include <cstdlib>
-#include <cstdio>
-#include <fstream>
-#include <iostream>
-#include <sstream>
-#include <stdexcept>
-#include <string>
-#include "tos-xconf.h"
 #include "tos-sessions.h"
 #include "tos-staff.h"
 
-using namespace std;
-
-int main(int argc, char** argv)
+Sessions::Sessions()
 {
-//    requireMinArgs(argc, 1);
-//
-//    ifstream in(argv[1]);
-//    assure(in, argv[1]);
-    ifstream in("/home/maxim/NetBeansProjects/tos-miniconf/dist/Debug/GNU-Linux-x86/termos.conf-everest");
-    assure(in, "/home/maxim/NetBeansProjects/tos-miniconf/dist/Debug/GNU-Linux-x86/termos.conf-everest");
-
-    XorgConf xconfig;
-    if (xconfig.parseTOSConfig(in))
-    {
-        cout << "tos-miniconf: Xorg section parsed normal" << endl;
-    }
-    xconfig.buildXorgConfig();
-
-    in.close();
-
-    return (EXIT_SUCCESS);
+    
 }
 
+bool Sessions::parseTOSConfig(std::ifstream & in)
+{
+    using namespace std;
+    return true;
+}
+
+void Sessions::buildSessions()
+{
+    
+}
