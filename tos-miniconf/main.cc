@@ -29,6 +29,7 @@
 #include "tos-xconf.h"
 #include "tos-sessions.h"
 #include "tos-staff.h"
+#include "str_tokenizer.h"
 
 using namespace std;
 
@@ -38,17 +39,25 @@ int main(int argc, char** argv)
 //
 //    ifstream in(argv[1]);
 //    assure(in, argv[1]);
-    ifstream in("/home/maxim/NetBeansProjects/tos-miniconf/dist/Debug/GNU-Linux-x86/termos.conf-everest");
-    assure(in, "/home/maxim/NetBeansProjects/tos-miniconf/dist/Debug/GNU-Linux-x86/termos.conf-everest");
-
-    XorgConf xconfig;
-    if (xconfig.parseTOSConfig(in))
+//
+//    XorgConf xconfig;
+//    if (xconfig.parseTOSConfig(in))
+//    {
+//        cout << "tos-miniconf: Xorg section parsed normal" << endl;
+//    }
+//    xconfig.buildXorgConfig();
+//
+//    in.close();
+    
+    std::string tempStr = "maxt=1";
+    StringTokenizer strtok(tempStr, "=");
+            
+    while (strtok.hasMoreTokens())
     {
-        cout << "tos-miniconf: Xorg section parsed normal" << endl;
+        cout << strtok.nextToken() << endl;
     }
-    xconfig.buildXorgConfig();
-
-    in.close();
+    
+    //cout << strtok.nextToken("=") << endl;
 
     return (EXIT_SUCCESS);
 }

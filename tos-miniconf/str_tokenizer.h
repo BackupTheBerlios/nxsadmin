@@ -18,24 +18,42 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
-#include "tos-staff.h"
 
-std::string & replaceAll(std::string & context, const std::string & from,
-                         const std::string & to)
+// Simple string tokenizer class, that allows an application to break a
+// string into tokens.
+          
+#ifndef _STR_TOKENIZER_H
+#define	_STR_TOKENIZER_H
+
+#include <string>
+
+class StringTokenizer
 {
-    using namespace std;
-    size_t lookHere = 0;
-    size_t foundHere;
-    while ((foundHere = context.find(from, lookHere))
-            != string::npos)
+public:
+
+    StringTokenizer(const std::string & aString, const std::string & aDelim = " ");
+
+    ~StringTokenizer()
     {
-        context.replace(foundHere, from.size(), to);
-        lookHere = foundHere + to.size();
-    }
-    return context;
-}
+    };
 
-bool startsWith(const std::string & base, const std::string & key)
-{
-    return base.compare(0, key.size(), key) == 0;
-}
+    int countTokens() const;
+    bool hasMoreElements() const;
+    bool hasMoreTokens() const;
+    std::string nextElement();
+    std::string nextToken();
+    std::string nextElement(const std::string & aDelim);
+    std::string nextToken(const std::string & aDelim);
+
+protected:
+
+    StringTokenizer();
+
+private:
+
+    std::string theTokenStr;
+    std::string theDelim;
+};
+
+#endif	/* _STR_TOKENIZER_H */
+

@@ -92,9 +92,9 @@ void XorgConf::buildXorgConfig() const
     using namespace std;
   
 //    ifstream in("/etc/X11/xorg.conf.tpl");
-    ifstream in("/home/maxim/NetBeansProjects/tos-miniconf/dist/Debug/GNU-Linux-x86/xorg.conf.tpl");
+    ifstream in("/home/tester/NetBeansProjects/tos-miniconf/dist/Debug/GNU-Linux-x86/xorg.conf.tpl");
 //    assure(in, "/etc/X11/xorg.conf.tpl");
-    assure(in, "/home/maxim/NetBeansProjects/tos-miniconf/dist/Debug/GNU-Linux-x86/xorg.conf.tpl");
+    assure(in, "/home/tester/NetBeansProjects/tos-miniconf/dist/Debug/GNU-Linux-x86/xorg.conf.tpl");
 
     // Read entire file into string;
     ostringstream ss;
@@ -111,7 +111,7 @@ void XorgConf::buildXorgConfig() const
     string s2 = replaceAll(s, "TOS_SCREEN_RESOLUTION", opts.SCREEN_RESOLUTION);
 
 //    ofstream out("/etc/X11/xorg.conf");
-    ofstream out("/home/maxim/NetBeansProjects/tos-miniconf/dist/Debug/GNU-Linux-x86/xorg.conf");
+    ofstream out("/home/tester/NetBeansProjects/tos-miniconf/dist/Debug/GNU-Linux-x86/xorg.conf");
     out << s2 << flush;
     out.close();
 }

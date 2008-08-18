@@ -4,6 +4,7 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
+      <itemPath>str_tokenizer.h</itemPath>
       <itemPath>tos-sessions.h</itemPath>
       <itemPath>tos-staff.h</itemPath>
       <itemPath>tos-xconf.h</itemPath>
@@ -16,6 +17,7 @@
                    displayName="Source Files"
                    projectFiles="true">
       <itemPath>main.cc</itemPath>
+      <itemPath>str_tokenizer.cc</itemPath>
       <itemPath>tos-sessions.cc</itemPath>
       <itemPath>tos-staff.cc</itemPath>
       <itemPath>tos-xconf.cc</itemPath>
@@ -42,6 +44,12 @@
       </compileType>
       <item path="main.cc">
         <itemTool>1</itemTool>
+      </item>
+      <item path="str_tokenizer.cc">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="str_tokenizer.h">
+        <itemTool>3</itemTool>
       </item>
       <item path="tos-sessions.cc">
         <itemTool>1</itemTool>
@@ -89,6 +97,12 @@
       </compileType>
       <item path="main.cc">
         <itemTool>1</itemTool>
+      </item>
+      <item path="str_tokenizer.cc">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="str_tokenizer.h">
+        <itemTool>3</itemTool>
       </item>
       <item path="tos-sessions.cc">
         <itemTool>1</itemTool>
