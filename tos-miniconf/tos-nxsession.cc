@@ -18,21 +18,43 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
-#include "tos-sessions.h"
+#include "tos-nxsession.h"
 #include "tos-staff.h"
+#include "Tokenizer.h"
 
-Sessions::Sessions()
+NXSession::NXSession()
 {
-    
+
 }
 
-bool Sessions::parseTOSConfig(std::ifstream & in)
+bool NXSession::parseTOSConfig(std::ifstream & in)
 {
-    using namespace std;
+    using namespace std;    
+    
+    Tokenizer str;
+    string token;    
+    string buf;
+    int counter = 0;
+        
+    in.seekg(0, ios::beg);
+    
+    str.setDelimiter("_=");
+
+    while (getline(in, buf))
+    {        
+//        str.setString(buf);
+//        while ((token = str.next()) != "")            
+//        {
+//            if 
+//            ++counter;
+//            cout << counter << ": " << token << endl;
+//        }
+        cout << buf << endl;
+    }    
     return true;
 }
 
-void Sessions::buildSessions()
+void NXSession::buildSession()
 {
-    
+
 }

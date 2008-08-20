@@ -27,37 +27,36 @@
 #include <stdexcept>
 #include <string>
 #include "tos-xconf.h"
-#include "tos-sessions.h"
+#include "tos-nxsession.h"
 #include "tos-staff.h"
-#include "str_tokenizer.h"
+#include "Tokenizer.h"
 
 using namespace std;
 
 int main(int argc, char** argv)
 {
-//    requireMinArgs(argc, 1);
-//
-//    ifstream in(argv[1]);
-//    assure(in, argv[1]);
-//
-//    XorgConf xconfig;
-//    if (xconfig.parseTOSConfig(in))
-//    {
-//        cout << "tos-miniconf: Xorg section parsed normal" << endl;
-//    }
-//    xconfig.buildXorgConfig();
-//
-//    in.close();
-    
-    std::string tempStr = "maxt=1";
-    StringTokenizer strtok(tempStr, "=");
-            
-    while (strtok.hasMoreTokens())
+    requireMinArgs(argc, 1);
+
+    ifstream in(argv[1]);
+    assure(in, argv[1]);
+
+    XorgConf xconfig;
+    NXSession nx;
+
+    if (xconfig.parseTOSConfig(in))
     {
-        cout << strtok.nextToken() << endl;
+        cout << "tos-miniconf: Xorg section parsed normal" << endl;        
+        in.clear(); // clear iostate of ifstream operations
     }
-    
-    //cout << strtok.nextToken("=") << endl;
+    xconfig.buildXorgConfig();
+
+    if (nx.parseTOSConfig(in))
+    {
+        cout << "tos-miniconf: NX section parsed normal" << endl;        
+        in.clear(); // clear iostate of ifstream operations
+    }
+
+    in.close();
 
     return (EXIT_SUCCESS);
 }

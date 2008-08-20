@@ -40,6 +40,8 @@ bool XorgConf::parseTOSConfig(std::ifstream & in)
     string buf;
     string option;
     string optionName;
+    
+    in.seekg(0, ios::beg);
 
     while (getline(in, buf))
     {
@@ -100,6 +102,7 @@ void XorgConf::buildXorgConfig() const
     ostringstream ss;
     ss << in.rdbuf();
     in.close();
+    
     string s = ss.str();
     replaceAll(s, "TOS_SCREEN_BLANK_TIME", opts.SCREEN_BLANK_TIME);
     replaceAll(s, "TOS_SCREEN_STANDBY_TIME", opts.SCREEN_STANDBY_TIME);

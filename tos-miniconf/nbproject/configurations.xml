@@ -4,8 +4,8 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
-      <itemPath>str_tokenizer.h</itemPath>
-      <itemPath>tos-sessions.h</itemPath>
+      <itemPath>Tokenizer.h</itemPath>
+      <itemPath>tos-nxsession.h</itemPath>
       <itemPath>tos-staff.h</itemPath>
       <itemPath>tos-xconf.h</itemPath>
     </logicalFolder>
@@ -17,8 +17,8 @@
                    displayName="Source Files"
                    projectFiles="true">
       <itemPath>main.cc</itemPath>
-      <itemPath>str_tokenizer.cc</itemPath>
-      <itemPath>tos-sessions.cc</itemPath>
+      <itemPath>Tokenizer.cc</itemPath>
+      <itemPath>tos-nxsession.cc</itemPath>
       <itemPath>tos-staff.cc</itemPath>
       <itemPath>tos-xconf.cc</itemPath>
     </logicalFolder>
@@ -42,19 +42,19 @@
           </linkerLibItems>
         </linkerTool>
       </compileType>
+      <item path="Tokenizer.cc">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="Tokenizer.h">
+        <itemTool>3</itemTool>
+      </item>
       <item path="main.cc">
         <itemTool>1</itemTool>
       </item>
-      <item path="str_tokenizer.cc">
+      <item path="tos-nxsession.cc">
         <itemTool>1</itemTool>
       </item>
-      <item path="str_tokenizer.h">
-        <itemTool>3</itemTool>
-      </item>
-      <item path="tos-sessions.cc">
-        <itemTool>1</itemTool>
-      </item>
-      <item path="tos-sessions.h">
+      <item path="tos-nxsession.h">
         <itemTool>3</itemTool>
       </item>
       <item path="tos-staff.cc">
@@ -95,19 +95,19 @@
           </linkerLibItems>
         </linkerTool>
       </compileType>
+      <item path="Tokenizer.cc">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="Tokenizer.h">
+        <itemTool>3</itemTool>
+      </item>
       <item path="main.cc">
         <itemTool>1</itemTool>
       </item>
-      <item path="str_tokenizer.cc">
+      <item path="tos-nxsession.cc">
         <itemTool>1</itemTool>
       </item>
-      <item path="str_tokenizer.h">
-        <itemTool>3</itemTool>
-      </item>
-      <item path="tos-sessions.cc">
-        <itemTool>1</itemTool>
-      </item>
-      <item path="tos-sessions.h">
+      <item path="tos-nxsession.h">
         <itemTool>3</itemTool>
       </item>
       <item path="tos-staff.cc">

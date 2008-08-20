@@ -18,28 +18,28 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
-#ifndef _TOS_SESSIONS_H
-#define	_TOS_SESSIONS_H
+#ifndef _TOS_NXSESSIONS_H
+#define	_TOS_NXSESSIONS_H
 
 #include <fstream>
 #include <iostream>
 #include <sstream>
 #include <string>
 
-class  Sessions
+class NXSession
 {
 public:
-    Sessions();
-    virtual ~Sessions()
-    {
-        
-    };
     
+    NXSession();
+
+    virtual ~NXSession()
+    {
+
+    };
+
     bool parseTOSConfig(std::ifstream & in);
-    void buildSessions();
+    void buildSession();
 };
-
-
 
 #endif	/* _TOS_SESSIONS_H */
 
