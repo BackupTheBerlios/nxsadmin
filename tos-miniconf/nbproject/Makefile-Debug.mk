@@ -15,7 +15,7 @@ RANLIB=ranlib
 CC=gcc
 CCC=g++
 CXX=g++
-FC=gfortran
+FC=
 
 # Include project Makefile
 include Makefile
@@ -25,14 +25,18 @@ OBJECTDIR=build/Debug/GNU-Linux-x86
 
 # Object Files
 OBJECTFILES= \
-	${OBJECTDIR}/main.o
+	${OBJECTDIR}/main.o \
+	${OBJECTDIR}/tos-staff.o \
+	${OBJECTDIR}/Tokenizer.o \
+	${OBJECTDIR}/tos-xconf.o \
+	${OBJECTDIR}/tos-nxsession.o
 
 # C Compiler Flags
 CFLAGS=
 
 # CC Compiler Flags
-CCFLAGS=
-CXXFLAGS=
+CCFLAGS=-O0
+CXXFLAGS=-O0
 
 # Fortran Compiler Flags
 FFLAGS=
@@ -49,7 +53,23 @@ dist/Debug/GNU-Linux-x86/tos-miniconf: ${OBJECTFILES}
 
 ${OBJECTDIR}/main.o: main.cc 
 	${MKDIR} -p ${OBJECTDIR}
-	$(COMPILE.cc) -g -o ${OBJECTDIR}/main.o main.cc
+	$(COMPILE.cc) -g -Wall -o ${OBJECTDIR}/main.o main.cc
+
+${OBJECTDIR}/tos-staff.o: tos-staff.cc 
+	${MKDIR} -p ${OBJECTDIR}
+	$(COMPILE.cc) -g -Wall -o ${OBJECTDIR}/tos-staff.o tos-staff.cc
+
+${OBJECTDIR}/Tokenizer.o: Tokenizer.cc 
+	${MKDIR} -p ${OBJECTDIR}
+	$(COMPILE.cc) -g -Wall -o ${OBJECTDIR}/Tokenizer.o Tokenizer.cc
+
+${OBJECTDIR}/tos-xconf.o: tos-xconf.cc 
+	${MKDIR} -p ${OBJECTDIR}
+	$(COMPILE.cc) -g -Wall -o ${OBJECTDIR}/tos-xconf.o tos-xconf.cc
+
+${OBJECTDIR}/tos-nxsession.o: tos-nxsession.cc 
+	${MKDIR} -p ${OBJECTDIR}
+	$(COMPILE.cc) -g -Wall -o ${OBJECTDIR}/tos-nxsession.o tos-nxsession.cc
 
 # Subprojects
 .build-subprojects:

@@ -39,3 +39,42 @@ bool startsWith(const std::string & base, const std::string & key)
 {
     return base.compare(0, key.size(), key) == 0;
 }
+
+std::string upperCase(const std::string & s)
+{
+    using namespace std;
+    string upper(s);
+    for (size_t i = 0; i < s.length(); ++i)
+    {
+        upper[i] = toupper(upper[i]);
+    }
+    return upper;
+}
+
+std::string lowerCase(const std::string & s)
+{
+    using namespace std;
+    string lower(s);
+    for (size_t i = 0; i < s.length(); ++i)
+    {
+        lower[i] = tolower(lower[i]);
+    }
+    return lower;
+}
+
+std::string trim(const std::string & s)
+{
+    using namespace std;
+    if (s.length() == 0)
+    {
+        return s;
+    }
+    size_t begin = s.find_first_not_of(" \a\b\f\n\r\t\v");
+    size_t end = s.find_last_not_of(" \a\b\f\n\r\t\v");
+    if (begin == string::npos)
+    {
+        return "";
+    }
+    return string(s, begin, end - begin + 1);
+}
+

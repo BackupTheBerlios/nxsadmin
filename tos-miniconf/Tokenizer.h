@@ -33,6 +33,9 @@ public:
     void set(const std::string& str, const std::string& delimiter = DEFAULT_DELIMITER);
     void setString(const std::string& str); // set source string only
     void setDelimiter(const std::string& delimiter); // set delimiter string only
+    
+    // developer@drohobych.com.ua: set delimiter without changing currPos
+    void setDelimiterPos(const std::string& delimiter);
 
     std::string next(); // return the next token, return "" if it ends
 

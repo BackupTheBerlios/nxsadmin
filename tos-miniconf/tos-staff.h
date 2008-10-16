@@ -24,6 +24,7 @@
 #include <cstddef>
 #include <cstdlib>
 #include <cstdio>
+
 #include <fstream>
 
 inline void assure(std::ifstream & in, const char * filename = "")
@@ -75,6 +76,11 @@ std::string & replaceAll(std::string & context, const std::string & from,
                          const std::string & to);
 
 bool startsWith(const std::string & base, const std::string & key);
+std::string upperCase(const std::string & s); // make uppercase copy of s
+std::string lowerCase(const std::string & s); // make lowercase copy of s
+
+// Tool to strip spaces from both ends of string
+std::string trim(const std::string & s);
 
 #endif	/* _TOS_STAFF_H */
 

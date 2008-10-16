@@ -25,20 +25,39 @@
 #include <iostream>
 #include <sstream>
 #include <string>
+#include <vector>
 
 class NXSession
 {
 public:
-    
+
     NXSession();
 
     virtual ~NXSession()
     {
-
     };
 
     bool parseTOSConfig(std::ifstream & in);
     void buildSession();
+
+private:
+
+    std::string upperCaseNX(const std::string & s) const;
+    
+     // Tool to strip spaces and quotes from both ends of string
+    std::string nxtrim(const std::string & s) const;
+            
+    typedef struct
+    {
+        std::string theSession;    // session identifier
+        std::string theTitle;      // session title
+        std::string theGroup;      // options group
+        std::string theOptionKey;  // option name
+        std::string theValue;      // option value
+    } NXStruct;
+
+    NXStruct theNXStruct;
+    std::vector<NXStruct> theNXStructArray;
 };
 
 #endif	/* _TOS_SESSIONS_H */

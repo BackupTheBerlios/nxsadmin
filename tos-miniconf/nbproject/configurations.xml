@@ -12,6 +12,9 @@
     <logicalFolder name="ResourceFiles"
                    displayName="Resource Files"
                    projectFiles="true">
+      <itemPath>nxcryptedpass.pl</itemPath>
+      <itemPath>termos.conf-everest</itemPath>
+      <itemPath>xorg.conf.tpl</itemPath>
     </logicalFolder>
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
@@ -37,7 +40,12 @@
         <platform>2</platform>
       </toolsSet>
       <compileType>
+        <ccCompilerTool>
+          <commandLine>-O0</commandLine>
+          <warningLevel>2</warningLevel>
+        </ccCompilerTool>
         <linkerTool>
+          <output>dist/Debug/GNU-Linux-x86/tos-miniconf</output>
           <linkerLibItems>
           </linkerLibItems>
         </linkerTool>
@@ -50,6 +58,12 @@
       </item>
       <item path="main.cc">
         <itemTool>1</itemTool>
+      </item>
+      <item path="nxcryptedpass.pl">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="termos.conf-everest">
+        <itemTool>3</itemTool>
       </item>
       <item path="tos-nxsession.cc">
         <itemTool>1</itemTool>
@@ -69,6 +83,9 @@
       <item path="tos-xconf.h">
         <itemTool>3</itemTool>
       </item>
+      <item path="xorg.conf.tpl">
+        <itemTool>3</itemTool>
+      </item>
     </conf>
     <conf name="Release" type="1">
       <toolsSet>
@@ -81,9 +98,10 @@
           <stripSymbols>true</stripSymbols>
         </cCompilerTool>
         <ccCompilerTool>
-          <developmentMode>5</developmentMode>
+          <developmentMode>0</developmentMode>
           <stripSymbols>true</stripSymbols>
-          <commandLine>-Os</commandLine>
+          <commandLine>-Os -fconserve-space -fno-enforce-eh-specs -fno-exceptions -fno-rtti</commandLine>
+          <warningLevel>2</warningLevel>
         </ccCompilerTool>
         <fortranCompilerTool>
           <developmentMode>5</developmentMode>
@@ -104,6 +122,12 @@
       <item path="main.cc">
         <itemTool>1</itemTool>
       </item>
+      <item path="nxcryptedpass.pl">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="termos.conf-everest">
+        <itemTool>3</itemTool>
+      </item>
       <item path="tos-nxsession.cc">
         <itemTool>1</itemTool>
       </item>
@@ -120,6 +144,9 @@
         <itemTool>1</itemTool>
       </item>
       <item path="tos-xconf.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="xorg.conf.tpl">
         <itemTool>3</itemTool>
       </item>
     </conf>

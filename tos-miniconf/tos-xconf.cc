@@ -19,6 +19,7 @@
  ***************************************************************************/
 
 #include "tos-xconf.h"
+
 #include "tos-staff.h"
 
 XorgConf::XorgConf()
@@ -43,44 +44,45 @@ bool XorgConf::parseTOSConfig(std::ifstream & in)
     
     in.seekg(0, ios::beg);
 
-    while (getline(in, buf))
+    while (!in.eof())
     {
+        getline(in, buf);
         option = buf.substr((buf.find("=") + 1), buf.size());
         optionName = buf.substr(0, buf.find("="));
         
-        if (optionName == "SCREEN_RESOLUTION" && option != "")
+        if ("SCREEN_RESOLUTION" == optionName && option != "")
         {            
            opts.SCREEN_RESOLUTION = option;
         }
-        if (optionName == "SCREEN_COLOR_DEPTH" && option != "")
+        if ("SCREEN_COLOR_DEPTH" == optionName && option != "")
         {
             opts.SCREEN_COLOR_DEPTH = option;
         }
-        if (optionName == "SCREEN_BLANK_TIME" && option != "") 
+        if ("SCREEN_BLANK_TIME" == optionName && option != "") 
         {
             opts.SCREEN_BLANK_TIME = option;
         }
-        if (optionName == "SCREEN_STANDBY_TIME" && option != "")
+        if ("SCREEN_STANDBY_TIME" == optionName && option != "")
         {
             opts.SCREEN_STANDBY_TIME = option;
         }
-        if (optionName == "SCREEN_SUSPEND_TIME" && option != "")
+        if ("SCREEN_SUSPEND_TIME" == optionName && option != "")
         {
             opts.SCREEN_SUSPEND_TIME = option;
         }
-        if (optionName == "SCREEN_OFF_TIME" && option != "")
+        if ("SCREEN_OFF_TIME" == optionName && option != "")
         {
             opts.SCREEN_OFF_TIME = option;
         }
-        if (optionName == "MOUSE_PROTOCOL" && option != "")
+        if ("MOUSE_PROTOCOL" == optionName && option != "")
         {
             opts.MOUSE_PROTOCOL = option;
         }
-        if (optionName == "MOUSE_DEVICE" && option != "")
+        if ("MOUSE_DEVICE" == optionName && option != "")
         {
             opts.MOUSE_DEVICE = option;
         }
-        if (optionName == "MOUSE_RESOLUTION" && option != "")
+        if ("MOUSE_RESOLUTION" == optionName && option != "")
         {
             opts.MOUSE_RESOLUTION = option;
         }
@@ -93,10 +95,12 @@ void XorgConf::buildXorgConfig() const
 {
     using namespace std;
   
-//    ifstream in("/etc/X11/xorg.conf.tpl");
-    ifstream in("/home/tester/NetBeansProjects/tos-miniconf/dist/Debug/GNU-Linux-x86/xorg.conf.tpl");
-//    assure(in, "/etc/X11/xorg.conf.tpl");
-    assure(in, "/home/tester/NetBeansProjects/tos-miniconf/dist/Debug/GNU-Linux-x86/xorg.conf.tpl");
+    ifstream in("/etc/X11/xorg.conf.tpl");
+    assure(in, "/etc/X11/xorg.conf.tpl");
+    
+    // USE THIS ONLY FOR TESTING!!!
+    //ifstream in("/home/maxim/NetBeansProjects/tos-miniconf/xorg.conf.tpl");
+    //assure(in, "/home/maxim/NetBeansProjects/tos-miniconf/xorg.conf.tpl");
 
     // Read entire file into string;
     ostringstream ss;
@@ -113,8 +117,13 @@ void XorgConf::buildXorgConfig() const
     replaceAll(s, "TOS_COLOR_DEPTH", opts.SCREEN_COLOR_DEPTH);
     string s2 = replaceAll(s, "TOS_SCREEN_RESOLUTION", opts.SCREEN_RESOLUTION);
 
-//    ofstream out("/etc/X11/xorg.conf");
-    ofstream out("/home/tester/NetBeansProjects/tos-miniconf/dist/Debug/GNU-Linux-x86/xorg.conf");
+    ofstream out("/etc/X11/xorg.conf");
+    assure(out, "/etc/X11/xorg.conf");
+    
+    // USE THIS ONLY FOR TESTING!!!
+    //ofstream out("/home/maxim/NetBeansProjects/tos-miniconf/xorg.conf");
+    //assure(out, "/home/maxim/NetBeansProjects/tos-miniconf/xorg.conf");
+    
     out << s2 << flush;
     out.close();
 }

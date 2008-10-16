@@ -18,18 +18,12 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
-#include <cstddef>
-#include <cstdlib>
-#include <cstdio>
-#include <fstream>
-#include <iostream>
-#include <sstream>
-#include <stdexcept>
-#include <string>
 #include "tos-xconf.h"
 #include "tos-nxsession.h"
 #include "tos-staff.h"
-#include "Tokenizer.h"
+
+#include <fstream>
+#include <iostream>
 
 using namespace std;
 
@@ -55,6 +49,7 @@ int main(int argc, char** argv)
         cout << "tos-miniconf: NX section parsed normal" << endl;        
         in.clear(); // clear iostate of ifstream operations
     }
+    nx.buildSession();
 
     in.close();
 
