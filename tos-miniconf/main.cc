@@ -49,7 +49,7 @@ int main(int argc, char** argv)
         cout << "tos-miniconf: NX section parsed normal" << endl;        
         in.clear(); // clear iostate of ifstream operations
     }
-    nx.buildSession();
+    nx.buildSession(xconfig.getXRes(), xconfig.getYRes());
 
     in.close();
 
