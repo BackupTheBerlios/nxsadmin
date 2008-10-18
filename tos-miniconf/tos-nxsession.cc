@@ -23,6 +23,8 @@
 #include "Tokenizer.h"
 #include "tos-staff.h"
 
+// TODO: add support for commenting NX options in config file
+
 NXSession::NXSession()
 {
 
@@ -105,12 +107,12 @@ bool NXSession::parseTOSConfig(std::ifstream & in)
     return true;
 }
 
-void NXSession::buildSession()
+void NXSession::buildSession(int width, int height)
 {
     using namespace std;
 
     ofstream out;
-    
+
     string nxsession;
     string currnxsession;
     string nxtitle;
@@ -120,7 +122,7 @@ void NXSession::buildSession()
 
     bool flag = false;
 
-    size_t end = theNXStructArray.size();    
+    size_t end = theNXStructArray.size();
     size_t i = 0;
     while (i < end)
     {
@@ -132,9 +134,14 @@ void NXSession::buildSession()
         {
             // create new nx file;
             string nxfile("/home/termos/.nx/config/" + nxtitle);
-
             // USE THIS ONLY FOR TESTING!!!
             //string nxfile("/home/maxim/NetBeansProjects/tos-miniconf/" + nxtitle);
+            
+            // create new nx icon on desktop
+            this->makeIconNX(this->nxtrim(theNXStructArray[i].theTitle),
+                             nxfile,
+                             width,
+                             height);
 
             out.open(nxfile.c_str());
             assure (out, nxfile.c_str());
@@ -171,7 +178,7 @@ void NXSession::buildSession()
                     << theNXStructArray[i].theValue
                     << " />"
                     << endl;
-            
+
             ++i;
 
             if (i < end)
@@ -238,4 +245,44 @@ std::string NXSession::nxtrim(const std::string & s) const
         return "";
     }
     return string(s, begin, end - begin + 1);
+}
+
+void NXSession::makeIconNX(const std::string & name, const std::string & fsession,
+                           int width, int height) const
+{
+    using namespace std;
+
+    static int X = -48;
+    static int Y = 16;
+
+    if (X < width && Y < height)
+    {
+        X += 96;
+    }
+    if (X > width && Y < height)
+    {
+        X = -48;
+        Y += 32;
+    }
+
+    ofstream out;
+    string fname("/etc/icewm/.xtdesktop/");
+    // USE THIS ONLY FOR TESTING!!!
+    //string fname("/home/maxim/NetBeansProjects/tos-miniconf/");
+    fname += name;
+    fname += ".lnk";
+
+    out.open(fname.c_str());
+    assure (out, fname.c_str());
+    
+    out << "table Icon" << endl;
+    out << "  Type: Program" << endl;
+    out << "  Caption: " << name << endl;
+    out << "  Command: /usr/bin/nx-session --session " << fsession << endl;
+    out << "  Icon: /usr/icons/nx_32x32.xpm" << endl;
+    out << "  X: " << X << endl;
+    out << "  Y: " << Y << endl;
+    out << "end" << endl << flush;
+    
+    out.close();
 }

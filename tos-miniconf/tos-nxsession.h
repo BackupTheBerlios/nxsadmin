@@ -38,7 +38,10 @@ public:
     };
 
     bool parseTOSConfig(std::ifstream & in);
-    void buildSession();
+    
+    // This method get screen width and height parameters
+    // for correct building icons for nx sessions on desktop
+    void buildSession(int width, int height);
 
 private:
 
@@ -46,6 +49,9 @@ private:
     
      // Tool to strip spaces and quotes from both ends of string
     std::string nxtrim(const std::string & s) const;
+    
+    void makeIconNX(const std::string & name, const std::string & fsession,
+                    int width, int height) const;
             
     typedef struct
     {
