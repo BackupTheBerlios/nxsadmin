@@ -38,6 +38,9 @@ public:
 
     bool parseTOSConfig(std::ifstream & in);
     void buildXorgConfig() const;
+    
+    int getXRes() const;
+    int getYRes() const;
 
 private:
 

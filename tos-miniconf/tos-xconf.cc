@@ -97,7 +97,6 @@ void XorgConf::buildXorgConfig() const
   
     ifstream in("/etc/X11/xorg.conf.tpl");
     assure(in, "/etc/X11/xorg.conf.tpl");
-    
     // USE THIS ONLY FOR TESTING!!!
     //ifstream in("/home/maxim/NetBeansProjects/tos-miniconf/xorg.conf.tpl");
     //assure(in, "/home/maxim/NetBeansProjects/tos-miniconf/xorg.conf.tpl");
@@ -118,12 +117,31 @@ void XorgConf::buildXorgConfig() const
     string s2 = replaceAll(s, "TOS_SCREEN_RESOLUTION", opts.SCREEN_RESOLUTION);
 
     ofstream out("/etc/X11/xorg.conf");
-    assure(out, "/etc/X11/xorg.conf");
-    
+    assure(out, "/etc/X11/xorg.conf");    
     // USE THIS ONLY FOR TESTING!!!
     //ofstream out("/home/maxim/NetBeansProjects/tos-miniconf/xorg.conf");
     //assure(out, "/home/maxim/NetBeansProjects/tos-miniconf/xorg.conf");
     
     out << s2 << flush;
     out.close();
+}
+
+int XorgConf::getXRes() const
+{
+    using namespace std;
+    
+    string res = opts.SCREEN_RESOLUTION;
+    string X = res.substr(0, res.find("x"));
+    
+    return (atoi(X.c_str()));        
+}
+
+int XorgConf::getYRes() const
+{
+    using namespace std;
+    
+    string res = opts.SCREEN_RESOLUTION;
+    string Y = res.substr((res.find("x") + 1), res.size());
+    
+    return (atoi(Y.c_str())); 
 }
