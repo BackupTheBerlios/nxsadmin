@@ -545,6 +545,8 @@ bool MyMainWindow::readSessionFiles(const Glib::ustring & aPath)
     struct dirent * ent;
     struct stat buf;
     Glib::ustring tempPath;
+    Glib::ustring fName;
+    static Glib::ustring fPrefix = "sessionId";
     
     if (!(dir = opendir(aPath.c_str())))
     {
@@ -556,7 +558,9 @@ bool MyMainWindow::readSessionFiles(const Glib::ustring & aPath)
     
     while ((ent = readdir(dir)))
     {
-        tempPath = aPath + (ent->d_name);
+        fName = (ent->d_name);
+        if( fName.find(fPrefix) != 0 ) continue;
+	tempPath = aPath + fName;
         
         statErr = stat(tempPath.c_str(), &buf);
         
