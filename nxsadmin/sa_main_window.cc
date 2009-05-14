@@ -1,6 +1,6 @@
 /***************************************************************************
  *   Copyright (C) 2007 by Maxim Stjazhkin                                 *
- *   maxt_t@drohobych.com.ua                                               *
+ *   maxt_t@users.berlios.de                                               *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -33,10 +33,10 @@
 //----------------------------------------------------------------------------
 Glib::ustring MyMainWindow::theNXDbPath("/var/lib/nxserver/db/running/");
 //----------------------------------------------------------------------------
-MyMainWindow::MyMainWindow() : Label1("Contents of table 2")
+MyMainWindow::MyMainWindow()
 {
     theRunningNum = theSuspendedNum = 0;
-    this->set_default_size(700, 550);
+    this->set_default_size(700, 350);
     this->set_border_width(5);
     this->set_position(Gtk::WIN_POS_CENTER);
     this->set_title(_("FreeNX Sessions Administrator"));
@@ -52,11 +52,7 @@ MyMainWindow::MyMainWindow() : Label1("Contents of table 2")
     this->createLogPaned();
     this->createTreeView();
     
-    theNoteBook = Gtk::manage(new Gtk::Notebook);
-    theNoteBook->append_page(*theVPaned, _("Sessions"));
-    theNoteBook->append_page(Label1, "Second");
-
-    theBox->pack_start(*theNoteBook);
+    theBox->pack_start(*theVPaned, Gtk::PACK_EXPAND_WIDGET);
     theBox->pack_start(*theHButtonBox, Gtk::PACK_SHRINK, 5);
     theBox->pack_end(*theStatusBar, Gtk::PACK_SHRINK);
     
@@ -668,10 +664,6 @@ bool MyMainWindow::readSession(const Glib::ustring & aFileName,
         {
             tmpSession.geometry = option;
         }
-        else if (optionName == "geometry")
-        {
-            tmpSession.geometry = option;
-        }
         else if (optionName == "host")
         {
             tmpSession.host = option;
@@ -783,7 +775,7 @@ void MyMainWindow::ExecLog(const std::string & aCommand, bool aMessageSend)
     std::string stdmsg;
     std::string stderr;
     Glib::RefPtr<Gtk::TextBuffer::Mark> mark;
-    char * time = new char[40];
+    char time[40];
 
     System::getTimeStr(time);
     std::string timestr(time);
@@ -826,8 +818,6 @@ void MyMainWindow::ExecLog(const std::string & aCommand, bool aMessageSend)
     it = theTextBuffer->end();
     mark = theTextBuffer->create_mark("endmark", it);
     theTextView->scroll_to(mark);
-        
-    delete [] time;
 }
 //----------------------------------------------------------------------------
 bool MyMainWindow::on_button_press_event(GdkEventButton * theEvent)

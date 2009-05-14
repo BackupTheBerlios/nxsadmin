@@ -1,6 +1,6 @@
 /***************************************************************************
  *   Copyright (C) 2007 by Maxim Stjazhkin                                 *
- *   maxt_t@drohobych.com.ua                                               *
+ *   maxt_t@users.berlios.de                                               *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -136,17 +136,13 @@ protected:
     void ExecLog(const std::string & aCommand, bool aMessageSend = false);
     
 protected:
-    
-    Gtk::Label Label1; // XXX Remove this!
-            
+
     ModelColumns theColumns;
     
     Gtk::AboutDialog * theAboutDialog;
     Gtk::VBox * theBox;
     Gtk::ScrolledWindow * theScrolledWindow;
     Gtk::Statusbar * theStatusBar;
-    
-    Gtk::Notebook * theNoteBook;
     
     Gtk::TreeView * theTreeView;
     Glib::RefPtr<Gtk::ListStore> theTreeModel;
