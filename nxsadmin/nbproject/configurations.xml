@@ -50,7 +50,6 @@
         </linkerTool>
       </compileType>
       <item path="config.h">
-        <itemExcluded>true</itemExcluded>
         <itemTool>3</itemTool>
       </item>
       <item path="main.cc">
@@ -60,21 +59,18 @@
         <itemTool>1</itemTool>
       </item>
       <item path="sa_main_window.h">
-        <itemExcluded>true</itemExcluded>
         <itemTool>3</itemTool>
       </item>
       <item path="sa_process_window.cc">
         <itemTool>1</itemTool>
       </item>
       <item path="sa_process_window.h">
-        <itemExcluded>true</itemExcluded>
         <itemTool>3</itemTool>
       </item>
       <item path="sa_sys_utils.cc">
         <itemTool>1</itemTool>
       </item>
       <item path="sa_sys_utils.h">
-        <itemExcluded>true</itemExcluded>
         <itemTool>3</itemTool>
       </item>
     </conf>
