@@ -16,15 +16,18 @@ CC=gcc
 CCC=g++
 CXX=g++
 FC=
+AS=
 
 # Macros
-PLATFORM=GNU-Linux-x86
+CND_PLATFORM=GNU-Linux-x86
+CND_CONF=Release
+CND_DISTDIR=dist
 
 # Include project Makefile
 include Makefile
 
 # Object Directory
-OBJECTDIR=build/Release/${PLATFORM}
+OBJECTDIR=build/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
@@ -43,33 +46,36 @@ CXXFLAGS=`pkg-config gtkmm-2.4 --cflags`
 # Fortran Compiler Flags
 FFLAGS=
 
+# Assembler Flags
+ASFLAGS=
+
 # Link Libraries and Options
 LDLIBSOPTIONS=
 
 # Build Targets
 .build-conf: ${BUILD_SUBPROJECTS}
-	${MAKE}  -f nbproject/Makefile-Release.mk dist/Release/${PLATFORM}/nxsadmin
+	${MAKE}  -f nbproject/Makefile-Release.mk dist/Release/GNU-Linux-x86/nxsadmin
 
-dist/Release/${PLATFORM}/nxsadmin: ${OBJECTFILES}
-	${MKDIR} -p dist/Release/${PLATFORM}
-	${LINK.cc} `pkg-config gtkmm-2.4 --libs` -o dist/Release/${PLATFORM}/nxsadmin -s  ${OBJECTFILES} ${LDLIBSOPTIONS} 
+dist/Release/GNU-Linux-x86/nxsadmin: ${OBJECTFILES}
+	${MKDIR} -p dist/Release/GNU-Linux-x86
+	${LINK.cc} `pkg-config gtkmm-2.4 --libs` -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/nxsadmin -s  ${OBJECTFILES} ${LDLIBSOPTIONS} 
 
-${OBJECTDIR}/sa_main_window.o: sa_main_window.cc 
+${OBJECTDIR}/sa_main_window.o: nbproject/Makefile-${CND_CONF}.mk sa_main_window.cc 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -Wall -s -DPROGRAMNAME_LOCALEDIR=\"/usr/local/share/locale\" -MMD -MP -MF $@.d -o ${OBJECTDIR}/sa_main_window.o sa_main_window.cc
 
-${OBJECTDIR}/main.o: main.cc 
+${OBJECTDIR}/main.o: nbproject/Makefile-${CND_CONF}.mk main.cc 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -Wall -s -DPROGRAMNAME_LOCALEDIR=\"/usr/local/share/locale\" -MMD -MP -MF $@.d -o ${OBJECTDIR}/main.o main.cc
 
-${OBJECTDIR}/sa_process_window.o: sa_process_window.cc 
+${OBJECTDIR}/sa_process_window.o: nbproject/Makefile-${CND_CONF}.mk sa_process_window.cc 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -Wall -s -DPROGRAMNAME_LOCALEDIR=\"/usr/local/share/locale\" -MMD -MP -MF $@.d -o ${OBJECTDIR}/sa_process_window.o sa_process_window.cc
 
-${OBJECTDIR}/sa_sys_utils.o: sa_sys_utils.cc 
+${OBJECTDIR}/sa_sys_utils.o: nbproject/Makefile-${CND_CONF}.mk sa_sys_utils.cc 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -Wall -s -DPROGRAMNAME_LOCALEDIR=\"/usr/local/share/locale\" -MMD -MP -MF $@.d -o ${OBJECTDIR}/sa_sys_utils.o sa_sys_utils.cc
@@ -80,7 +86,7 @@ ${OBJECTDIR}/sa_sys_utils.o: sa_sys_utils.cc
 # Clean Targets
 .clean-conf:
 	${RM} -r build/Release
-	${RM} dist/Release/${PLATFORM}/nxsadmin
+	${RM} dist/Release/GNU-Linux-x86/nxsadmin
 
 # Subprojects
 .clean-subprojects:

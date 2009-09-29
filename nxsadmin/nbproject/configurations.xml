@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<configurationDescriptor version="51">
+<configurationDescriptor version="62">
   <logicalFolder name="root" displayName="root" projectFiles="true">
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
@@ -36,43 +36,19 @@
         <platform>2</platform>
       </toolsSet>
       <compileType>
-        <ccCompilerTool>
+        <ccTool>
           <commandLine>`pkg-config gtkmm-2.4 --cflags`</commandLine>
           <preprocessorList>
             <Elem>PROGRAMNAME_LOCALEDIR="/usr/local/share/locale"</Elem>
           </preprocessorList>
           <warningLevel>2</warningLevel>
-        </ccCompilerTool>
+        </ccTool>
         <linkerTool>
           <linkerLibItems>
           </linkerLibItems>
           <commandLine>`pkg-config gtkmm-2.4 --libs`</commandLine>
         </linkerTool>
       </compileType>
-      <item path="config.h">
-        <itemTool>3</itemTool>
-      </item>
-      <item path="main.cc">
-        <itemTool>1</itemTool>
-      </item>
-      <item path="sa_main_window.cc">
-        <itemTool>1</itemTool>
-      </item>
-      <item path="sa_main_window.h">
-        <itemTool>3</itemTool>
-      </item>
-      <item path="sa_process_window.cc">
-        <itemTool>1</itemTool>
-      </item>
-      <item path="sa_process_window.h">
-        <itemTool>3</itemTool>
-      </item>
-      <item path="sa_sys_utils.cc">
-        <itemTool>1</itemTool>
-      </item>
-      <item path="sa_sys_utils.h">
-        <itemTool>3</itemTool>
-      </item>
     </conf>
     <conf name="Release" type="1">
       <toolsSet>
@@ -81,10 +57,10 @@
         <platform>2</platform>
       </toolsSet>
       <compileType>
-        <cCompilerTool>
+        <cTool>
           <developmentMode>5</developmentMode>
-        </cCompilerTool>
-        <ccCompilerTool>
+        </cTool>
+        <ccTool>
           <developmentMode>5</developmentMode>
           <stripSymbols>true</stripSymbols>
           <commandLine>`pkg-config gtkmm-2.4 --cflags`</commandLine>
@@ -92,7 +68,7 @@
             <Elem>PROGRAMNAME_LOCALEDIR="/usr/local/share/locale"</Elem>
           </preprocessorList>
           <warningLevel>2</warningLevel>
-        </ccCompilerTool>
+        </ccTool>
         <fortranCompilerTool>
           <developmentMode>5</developmentMode>
         </fortranCompilerTool>
@@ -114,30 +90,6 @@
                             group="sys"/>
         </packFileList>
       </packaging>
-      <item path="config.h">
-        <itemTool>3</itemTool>
-      </item>
-      <item path="main.cc">
-        <itemTool>1</itemTool>
-      </item>
-      <item path="sa_main_window.cc">
-        <itemTool>1</itemTool>
-      </item>
-      <item path="sa_main_window.h">
-        <itemTool>3</itemTool>
-      </item>
-      <item path="sa_process_window.cc">
-        <itemTool>1</itemTool>
-      </item>
-      <item path="sa_process_window.h">
-        <itemTool>3</itemTool>
-      </item>
-      <item path="sa_sys_utils.cc">
-        <itemTool>1</itemTool>
-      </item>
-      <item path="sa_sys_utils.h">
-        <itemTool>3</itemTool>
-      </item>
     </conf>
   </confs>
 </configurationDescriptor>
