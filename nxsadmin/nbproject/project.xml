@@ -151,6 +151,27 @@
             <cpp-extensions>cc</cpp-extensions>
             <header-extensions>h</header-extensions>
             <make-dep-projects/>
+            <c-extensions/>
+            <cpp-extensions>cc</cpp-extensions>
+            <header-extensions>h</header-extensions>
+            <c-extensions/>
+            <cpp-extensions>cc</cpp-extensions>
+            <header-extensions>h</header-extensions>
+            <c-extensions/>
+            <cpp-extensions>cc</cpp-extensions>
+            <header-extensions>h</header-extensions>
+            <c-extensions/>
+            <cpp-extensions>cc</cpp-extensions>
+            <header-extensions>h</header-extensions>
+            <c-extensions/>
+            <cpp-extensions>cc</cpp-extensions>
+            <header-extensions>h</header-extensions>
+            <c-extensions/>
+            <cpp-extensions>cc</cpp-extensions>
+            <header-extensions>h</header-extensions>
+            <c-extensions/>
+            <cpp-extensions>cc</cpp-extensions>
+            <header-extensions>h</header-extensions>
         </data>
     </configuration>
 </project>
