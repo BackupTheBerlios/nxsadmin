@@ -469,10 +469,10 @@ void MyMainWindow::createAboutDialog()
     theAboutDialog->set_copyright(_("(C) 2008 by Maxim Stjazhkin"));
     theAboutDialog->set_comments(_("FreeNX Sessions Administrator provides a graphical tool for managment of active NX sessions on FreeNX server"));
     theAboutDialog->set_license("GPL");
-    theAboutDialog->set_website("http://cgroup.drohobych.com.ua");
-    theAboutDialog->set_website_label("cgroup.drohobych.com.ua");
+    theAboutDialog->set_website("http://nxsadmin.berlios.de");
+    theAboutDialog->set_website_label("nxsadmin.berlios.de");
     std::list<Glib::ustring> list_autors;
-    list_autors.push_back(_("Maxim Stjazhkin, maxt_t@drohobych.com.ua"));
+    list_autors.push_back(_("Maxim Stjazhkin, maxt_t@users.berlios.de"));
     theAboutDialog->set_authors(list_autors);
 }
 //----------------------------------------------------------------------------
