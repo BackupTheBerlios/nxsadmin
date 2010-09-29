@@ -176,7 +176,6 @@ void MyMainWindow::onMenuMessageSend()
             return;
         }
         
-        // FIXME: Fix the error message
         if (count > MAX_MESSAGE_LENGTH)
         {
             Glib::ustring dmesg = Glib::ustring::compose(_("The message length more than %1 symbols!!"), MAX_MESSAGE_LENGTH);
@@ -228,7 +227,6 @@ void MyMainWindow::onMenuMessageSendToAll()
             return;
         }
         
-        // FIXME: Fix the error message
         if (count > MAX_MESSAGE_LENGTH)
         {
             Glib::ustring dmesg = Glib::ustring::compose(_("The message length more than %1 symbols!!"), MAX_MESSAGE_LENGTH);
