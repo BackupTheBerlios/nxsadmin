@@ -179,9 +179,10 @@ void MyMainWindow::onMenuMessageSend()
         // FIXME: Fix the error message
         if (count > MAX_MESSAGE_LENGTH)
         {
+            Glib::ustring dmesg = Glib::ustring::compose(_("The message length more than %1 symbols!!"), MAX_MESSAGE_LENGTH);
             Gtk::MessageDialog
                     dialog(*this, "ERROR", false, Gtk::MESSAGE_ERROR);
-            dialog.set_secondary_text(_("The message length more than 1024 symbols!!"));
+            dialog.set_secondary_text(dmesg);
             dialog.run();
             return;
         }
@@ -230,9 +231,10 @@ void MyMainWindow::onMenuMessageSendToAll()
         // FIXME: Fix the error message
         if (count > MAX_MESSAGE_LENGTH)
         {
+            Glib::ustring dmesg = Glib::ustring::compose(_("The message length more than %1 symbols!!"), MAX_MESSAGE_LENGTH);
             Gtk::MessageDialog
                     dialog(*this, "ERROR", false, Gtk::MESSAGE_ERROR);
-            dialog.set_secondary_text(_("The message length more than 1024 symbols!!"));
+            dialog.set_secondary_text(dmesg);
             dialog.run();
             return;
         }
